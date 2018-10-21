@@ -5,9 +5,8 @@ export default class Header extends Component {
   render() {
     return (
       <ul>
-        <li><Link to='/'>トレーニング</Link></li>
-        <li><Link to='/result'>結果</Link></li>
-        <li><Link to='/tutorial'>チュートリアル</Link></li>
+        <li><Link to='/tutorial'>使い方</Link></li>
+        <li><Link to='/news'>新着情報</Link></li>
       </ul>
     )
   }
