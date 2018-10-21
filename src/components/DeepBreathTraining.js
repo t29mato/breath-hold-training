@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { ProgressBar } from 'react-bootstrap';
 
 /*
 1. 初期画面描画
@@ -10,35 +11,40 @@ import { Link } from 'react-router-dom'
 　- 4, 5の時は常に秒 数が表示される
 6. 150秒経過で終了。
 7. 息止めトレーニングに
-8. 息止めトレーニングのスタートボタン押下
-9. タイマースタート
-10. 息が続かなくなったらタイマーを手動で停止させる
-11. 息止めていた時間だけ、タイマースタートして、休憩してもらう
-12. 休憩時間が終了したら息どめ開始が押せるようになる
-13. 3かい繰り返したら、終了
 */
 
 export default class DeepBreathTraining extends Component {
+
   constructor() {
     super();
     this.state = {
       time: 0,
-      finishFlag: false
+      countdown: 0,
+      cycle: 0,
+      message: 'スタートボタンを押してください',
+      finishFlag: false,
     }
   }
-
   
   update() {
     var time = this.state.time;
-    if (time >= 8) {
+    var cycle = this.state.cycle;
+    if (time === 15 * 1) {
       this.finish()
       return;
     };
+    if ((time) % 15 === 0) {
+      this.setState({ cycle: cycle + 1, message: '吸って〜' })
+    }
+    if ((time) % 15 === 5) {
+      this.setState({ message: '吐いて〜' })
+    }
+    if ((time) % 15 < 5) {
+      this.setState ({ countdown: 5 - (time % 15) })
+    } else {
+      this.setState ({ countdown: 15 - (time % 15) })
+    }
     this.setState ({ time: time + 1 })
-    console.log(time);
-    if (time < 5) { return; }
-    if ((time - 5) % 15 === 0) { console.log('吸って〜'); }
-    if ((time - 5) % 15 === 5) { console.log('吐いて〜'); }
   }
 
   start() {
@@ -52,7 +58,12 @@ export default class DeepBreathTraining extends Component {
 
   reset() {
     this.stop();
-    this.setState({ time: 0 });
+    this.setState({
+      time: 0,
+      cycle: 0,
+      countdown: 0,
+      message: 'リセットされました'
+    });
   }  
 
   finish() {
@@ -65,8 +76,11 @@ export default class DeepBreathTraining extends Component {
     return (
       <div>
         <h2>深呼吸トレーニングへようこそ</h2>
-        <p>タイマー： { this.state.time }</p>
-        <p>メッセージ</p>
+        <ProgressBar now={60} />
+        <p>トレーニング時間：{ this.state.time }秒</p>
+        <p>サイクル：{ this.state.cycle }回目</p>
+        <p>メッセージ：{ this.state.message }</p>
+        <p>カウントダウン：{ this.state.countdown }秒</p>
         <button type='button' name='start' onClick={ () => this.start() }>スタート</button>
         <button type='button' name='reset' onClick={ () => this.reset() }>リセット</button>
         <div
