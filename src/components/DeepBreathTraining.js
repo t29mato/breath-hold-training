@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { ProgressBar } from 'react-bootstrap';
+import { ProgressBar, Alert } from 'react-bootstrap';
 
 /*
 1. 初期画面描画
@@ -19,37 +19,43 @@ export default class DeepBreathTraining extends Component {
     super();
     this.state = {
       time: 0,
-      countdown: 0,
+      countdown: '',
       cycle: 0,
       message: 'スタートボタンを押してください',
+      startFlag: false,
+      breathInFlag: false,
       finishFlag: false,
     }
+    this.cycleInterval = 15; // 15秒 (吸って5秒, 吐いて10秒)
+    this.breathInInterval = 5; // 15秒 (吸って5秒, 吐いて10秒)
+    this.breathOutInterval = 10; // 15秒 (吸って5秒, 吐いて10秒)
+    this.cycleTimes = 1; // 3回
   }
-  
+
   update() {
     var time = this.state.time;
     var cycle = this.state.cycle;
-    if (time === 15 * 1) {
+    if (time === this.cycleInterval * this.cycleTimes) {
       this.finish()
       return;
     };
-    if ((time) % 15 === 0) {
-      this.setState({ cycle: cycle + 1, message: '吸って〜' })
+    if (time % 15 === 0) {
+      this.setState({ cycle: cycle + 1, message: '吸って〜', breathInFlag: true })
     }
-    if ((time) % 15 === 5) {
-      this.setState({ message: '吐いて〜' })
+    if (time % 15 === 5) {
+      this.setState({ message: '吐いて〜', breathInFlag: false })
     }
-    if ((time) % 15 < 5) {
+    if (time % 15 < 5) {
       this.setState ({ countdown: 5 - (time % 15) })
     } else {
       this.setState ({ countdown: 15 - (time % 15) })
     }
-    this.setState ({ time: time + 1 })
+    this.setState ({ time: this.state.time + 1 })
   }
 
   start() {
     this.intervalTimer = setInterval(() => this.update(), 1000);
-    console.log('開始5秒前');
+    this.setState ({ startFlag: true });
   }
 
   stop() {
@@ -61,30 +67,38 @@ export default class DeepBreathTraining extends Component {
     this.setState({
       time: 0,
       cycle: 0,
-      countdown: 0,
-      message: 'リセットされました'
+      countdown: '',
+      message: 'スタートボタンを押してください',
+      startFlag: false,
+      finishFlag: false,
     });
   }  
 
   finish() {
     this.stop();
-    this.setState({finishFlag: true})
-    console.log('終了!')
+    this.setState({
+      finishFlag: true,
+      startFlag: false, 
+      message: 'お疲れ様でした、深呼吸トレーニングは終了です。このまま息止めトレーニングに進みましょう。',
+    })
   }
 
   render() {
     return (
       <div>
         <h2>深呼吸トレーニングへようこそ</h2>
-        <ProgressBar now={60} />
-        <p>トレーニング時間：{ this.state.time }秒</p>
-        <p>サイクル：{ this.state.cycle }回目</p>
-        <p>メッセージ：{ this.state.message }</p>
-        <p>カウントダウン：{ this.state.countdown }秒</p>
+        <Alert variant={'primary'}>
+          { this.state.message }
+        </Alert>
+        <h5>トレーニング時間：{ this.state.time }秒 ({ this.state.cycle }サイクル目)</h5>
+        <ProgressBar now={ this.state.time / (this.cycleInterval * this.cycleTimes) * 100} />
+        <p></p>
+        <h5>カウントダウン：{ this.state.countdown + '秒' }</h5>
+        <ProgressBar now={ this.state.breathInFlag ? (this.breathInInterval -this.state.countdown) / this.breathInInterval * 100 : 0 }/>
         <button type='button' name='start' onClick={ () => this.start() }>スタート</button>
         <button type='button' name='reset' onClick={ () => this.reset() }>リセット</button>
         <div
-          style={{ display: this.state.finishFlag ? '': 'none' }}
+          className={ this.state.finishFlag ? '': 'd-none' }
         >
         <Link to='/breath-hold'>息止めトレーニングに進む</Link></div>
       </div>  
