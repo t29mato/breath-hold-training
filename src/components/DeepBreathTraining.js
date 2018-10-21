@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { ProgressBar, Alert } from 'react-bootstrap';
+import { Row, Col, ProgressBar, Alert, ButtonToolbar, Button } from 'react-bootstrap';
 
 /*
 1. 初期画面描画
@@ -19,36 +19,30 @@ export default class DeepBreathTraining extends Component {
     super();
     this.state = {
       time: 0,
-      countdown: '',
-      cycle: 0,
+      interval: 0,
       message: 'スタートボタンを押してください',
       startFlag: false,
       breathInFlag: false,
       finishFlag: false,
     }
-    this.cycleInterval = 15; // 15秒 (吸って5秒, 吐いて10秒)
-    this.breathInInterval = 5; // 15秒 (吸って5秒, 吐いて10秒)
-    this.breathOutInterval = 10; // 15秒 (吸って5秒, 吐いて10秒)
-    this.cycleTimes = 1; // 3回
+    this.breathInterval = 15; // 15秒 (吸って5秒, 吐いて10秒)
+    this.breathInInterval = 5; // 5秒
+    this.breathOutInterval = 10; // 10秒
+    this.breathTimes = 10; // 3回
   }
 
   update() {
     var time = this.state.time;
-    var cycle = this.state.cycle;
-    if (time === this.cycleInterval * this.cycleTimes) {
+    var interval = this.state.interval;
+    if (time === this.breathInterval * this.breathTimes) {
       this.finish()
       return;
     };
-    if (time % 15 === 0) {
-      this.setState({ cycle: cycle + 1, message: '吸って〜', breathInFlag: true })
+    if (time % this.breathInterval === 0) {
+      this.setState({ interval: interval + 1, message: '吸って〜', breathInFlag: true })
     }
-    if (time % 15 === 5) {
+    if (time % this.breathInterval === 5) {
       this.setState({ message: '吐いて〜', breathInFlag: false })
-    }
-    if (time % 15 < 5) {
-      this.setState ({ countdown: 5 - (time % 15) })
-    } else {
-      this.setState ({ countdown: 15 - (time % 15) })
     }
     this.setState ({ time: this.state.time + 1 })
   }
@@ -66,8 +60,7 @@ export default class DeepBreathTraining extends Component {
     this.stop();
     this.setState({
       time: 0,
-      cycle: 0,
-      countdown: '',
+      interval: 0,
       message: 'スタートボタンを押してください',
       startFlag: false,
       finishFlag: false,
@@ -79,24 +72,59 @@ export default class DeepBreathTraining extends Component {
     this.setState({
       finishFlag: true,
       startFlag: false, 
-      message: 'お疲れ様でした、深呼吸トレーニングは終了です。このまま息止めトレーニングに進みましょう。',
+      message: '深呼吸トレーニングは終了です。このまま息止めトレーニングに進みましょう。',
     })
   }
 
+  ProgressOfTotal() {
+    return this.state.time / (this.breathInterval * this.breathTimes) * 100;
+  }
+
+  ProgressOfInterval() {
+    if (this.state.time % this.breathInterval === 0) {
+      return 0;
+    }
+    if (this.state.breathInFlag) {
+      return (this.state.time % this.breathInterval) / this.breathInInterval * 100;
+    } else {
+      return (this.breathInterval - this.state.time % this.breathInterval) / this.breathOutInterval * 100;
+    }
+  }
+
   render() {
-    return (
+    return ( 
       <div>
         <h2>深呼吸トレーニングへようこそ</h2>
         <Alert variant={'primary'}>
           { this.state.message }
         </Alert>
-        <h5>トレーニング時間：{ this.state.time }秒 ({ this.state.cycle }サイクル目)</h5>
-        <ProgressBar now={ this.state.time / (this.cycleInterval * this.cycleTimes) * 100} />
+        <ProgressBar now={ this.ProgressOfInterval() }/>
         <p></p>
-        <h5>カウントダウン：{ this.state.countdown + '秒' }</h5>
-        <ProgressBar now={ this.state.breathInFlag ? (this.breathInInterval -this.state.countdown) / this.breathInInterval * 100 : 0 }/>
-        <button type='button' name='start' onClick={ () => this.start() }>スタート</button>
-        <button type='button' name='reset' onClick={ () => this.reset() }>リセット</button>
+        <h5>トレーニング時間：{ this.state.time }秒 ({ this.state.interval }サイクル目)</h5>
+        <ProgressBar now={ this.ProgressOfTotal() } />
+        <p></p>
+        <Row>
+          <Col>
+            <Button
+              variant="primary"
+              disabled={this.state.startFlag}
+              onClick={ () => this.start() }
+              block
+            >
+              スタート
+            </Button>
+          </Col>        
+          <Col>
+            <Button
+              variant="dark"
+              disabled={!this.state.startFlag}
+              onClick={ () => this.reset() }
+              block
+            >
+              リセット
+            </Button>
+          </Col>        
+        </Row>
         <div
           className={ this.state.finishFlag ? '': 'd-none' }
         >
