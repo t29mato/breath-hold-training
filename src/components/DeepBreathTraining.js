@@ -76,11 +76,11 @@ export default class DeepBreathTraining extends Component {
     })
   }
 
-  ProgressOfTotal() {
+  calculateTotalProgress() {
     return this.state.time / (this.breathInterval * this.breathTimes) * 100;
   }
 
-  ProgressOfInterval() {
+  calculateIntervalProgress() {
     if (this.state.time % this.breathInterval === 0) {
       return 0;
     }
@@ -89,7 +89,7 @@ export default class DeepBreathTraining extends Component {
     } else {
       return (this.breathInterval - this.state.time % this.breathInterval) / this.breathOutInterval * 100;
     }
-  }
+  }  
 
   render() {
     return ( 
@@ -98,10 +98,10 @@ export default class DeepBreathTraining extends Component {
         <Alert variant={'primary'}>
           { this.state.message }
         </Alert>
-        <ProgressBar now={ this.ProgressOfInterval() }/>
+        <ProgressBar now={ this.calculateIntervalProgress() }/>
         <p></p>
         <h5>トレーニング時間：{ this.state.time }秒 ({ this.state.interval }サイクル目)</h5>
-        <ProgressBar now={ this.ProgressOfTotal() } />
+        <ProgressBar now={ this.calculateTotalProgress() } />
         <p></p>
         <Row>
           <Col>
