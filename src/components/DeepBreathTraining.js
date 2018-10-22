@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Row, Col, ProgressBar, Alert, ButtonToolbar, Button } from 'react-bootstrap';
+import { Row, Col, ProgressBar, Alert, Button } from 'react-bootstrap';
 
 /*
 1. 初期画面描画
