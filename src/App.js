@@ -20,7 +20,7 @@ class App extends Component {
           <Route path='/tutorial' component={Tutorial} />
           <Route path='/news' component={News} />
         </Container>
-      </BrowserRouter>  
+      </BrowserRouter>
     )
   }
 }
