@@ -30,8 +30,9 @@ export default class BreathHoldTraining extends Component {
       resetButton: false,
     }
     this.interval = 3; // 3回で終了
-    this.minRestTime = 20; // 最低120秒(2分間)は休憩する
+    this.minRestTime = 120; // 最低120秒(2分間)は休憩する
     this.score = [];
+    this.audioElem = new Audio();
   }
 
   update() {
@@ -44,8 +45,9 @@ export default class BreathHoldTraining extends Component {
         this.stop();
         this.setState({
           startButton: true,
-          message: this.state.interval + '回目の休憩終了です。次の息止めを開始できます。',
+          message: this.state.interval + '回目の休憩終了です。',
         });
+        this.playSound('FinishRestTime');
       }
     }
   }
@@ -105,8 +107,15 @@ export default class BreathHoldTraining extends Component {
       this.setState({
         message: this.state.interval + '回目の息止め終了。息止め時間か最低2分間の休憩が必要なためカウントダウン開始します。',
       })
+      this.playSound('StartCountDown');
     }
   }
+
+  playSound(fileName) {
+    this.audioElem.src = 'mp3/' + fileName + '.mp3';
+    this.audioElem.play();
+  }
+
 
   render() {
     return (

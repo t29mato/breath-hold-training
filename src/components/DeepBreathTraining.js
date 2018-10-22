@@ -4,7 +4,7 @@ import { Row, Col, ProgressBar, Alert, ButtonToolbar, Button } from 'react-boots
 
 /*
 1. 初期画面描画
-2. スタートボタン押下
+2. 開始ボタン押下
 3. 開始5秒前のアナウンス
 4. 開始と同時に吸って5秒
 5. 5秒経過後に、10秒の吐いて
@@ -20,7 +20,7 @@ export default class DeepBreathTraining extends Component {
     this.state = {
       time: 0,
       interval: 0,
-      message: 'スタートボタンを押してください',
+      message: '開始ボタンを押してください',
       startFlag: false,
       breathInFlag: false,
       finishFlag: false,
@@ -29,6 +29,7 @@ export default class DeepBreathTraining extends Component {
     this.breathInInterval = 5; // 5秒
     this.breathOutInterval = 10; // 10秒
     this.breathTimes = 10; // 3回
+    this.audioElem = new Audio();
   }
 
   update() {
@@ -40,9 +41,11 @@ export default class DeepBreathTraining extends Component {
     };
     if (time % this.breathInterval === 0) {
       this.setState({ interval: interval + 1, message: '吸って〜', breathInFlag: true })
+      this.playSound('BreathIn');
     }
     if (time % this.breathInterval === 5) {
       this.setState({ message: '吐いて〜', breathInFlag: false })
+      this.playSound('BreathOut');
     }
     this.setState ({ time: this.state.time + 1 })
   }
@@ -61,19 +64,20 @@ export default class DeepBreathTraining extends Component {
     this.setState({
       time: 0,
       interval: 0,
-      message: 'スタートボタンを押してください',
+      message: '開始ボタンを押してください',
       startFlag: false,
       finishFlag: false,
     });
-  }  
+  }
 
   finish() {
     this.stop();
     this.setState({
       finishFlag: true,
-      startFlag: false, 
+      startFlag: false,
       message: '深呼吸トレーニングは終了です。このまま息止めトレーニングに進みましょう。',
     })
+    this.playSound('PressStartButton');
   }
 
   calculateTotalProgress() {
@@ -89,10 +93,15 @@ export default class DeepBreathTraining extends Component {
     } else {
       return (this.breathInterval - this.state.time % this.breathInterval) / this.breathOutInterval * 100;
     }
-  }  
+  }
+
+  playSound(fileName) {
+    this.audioElem.src = 'mp3/' + fileName + '.mp3';
+    this.audioElem.play();
+  }
 
   render() {
-    return ( 
+    return (
       <div>
         <h2>深呼吸トレーニングへようこそ</h2>
         <Alert variant={'primary'}>
@@ -111,9 +120,9 @@ export default class DeepBreathTraining extends Component {
               onClick={ () => this.start() }
               block
             >
-              スタート
+              開始
             </Button>
-          </Col>        
+          </Col>
           <Col>
             <Button
               variant="dark"
@@ -123,13 +132,13 @@ export default class DeepBreathTraining extends Component {
             >
               リセット
             </Button>
-          </Col>        
+          </Col>
         </Row>
         <div
           className={ this.state.finishFlag ? '': 'd-none' }
         >
         <Link to='/breath-hold'>息止めトレーニングに進む</Link></div>
-      </div>  
+      </div>
     )
   }
 }
