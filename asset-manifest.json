@@ -1,11 +1,11 @@
 {
-  "main.js": "/static/js/main.c6a5622d.chunk.js",
-  "main.js.map": "/static/js/main.c6a5622d.chunk.js.map",
-  "static/js/1.a69d3663.chunk.js": "/static/js/1.a69d3663.chunk.js",
-  "static/js/1.a69d3663.chunk.js.map": "/static/js/1.a69d3663.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.229c360f.js",
-  "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
-  "index.html": "/index.html",
-  "precache-manifest.3ac1989d0ae0b777193ecaf8d360bf22.js": "/precache-manifest.3ac1989d0ae0b777193ecaf8d360bf22.js",
-  "service-worker.js": "/service-worker.js"
+  "main.js": "/breath-hold-training/static/js/main.fe0edc23.chunk.js",
+  "main.js.map": "/breath-hold-training/static/js/main.fe0edc23.chunk.js.map",
+  "static/js/1.a69d3663.chunk.js": "/breath-hold-training/static/js/1.a69d3663.chunk.js",
+  "static/js/1.a69d3663.chunk.js.map": "/breath-hold-training/static/js/1.a69d3663.chunk.js.map",
+  "runtime~main.js": "/breath-hold-training/static/js/runtime~main.ce263281.js",
+  "runtime~main.js.map": "/breath-hold-training/static/js/runtime~main.ce263281.js.map",
+  "index.html": "/breath-hold-training/index.html",
+  "precache-manifest.a794e32a9d8646997a3cd93283299818.js": "/breath-hold-training/precache-manifest.a794e32a9d8646997a3cd93283299818.js",
+  "service-worker.js": "/breath-hold-training/service-worker.js"
 }
