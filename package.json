@@ -1,6 +1,7 @@
 {
   "name": "bht-web",
   "version": "0.1.0",
+  "homepage": "https://t29mato.github.io/breath-hold-training/",
   "private": true,
   "dependencies": {
     "babel-loader": "^8.0.4",

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Row, Col, ProgressBar, Alert, Table, Button } from 'react-bootstrap';
+import { Row, Col, Alert, Table, Button } from 'react-bootstrap';
 
 /*
 0. 描画
@@ -88,7 +88,7 @@ export default class BreathHoldTraining extends Component {
 
   finish() {
     this.score += this.state.time;
-    if (this.state.interval == this.interval) { // 3回終了
+    if (this.state.interval === this.interval) { // 3回終了
       this.stop();
       this.setState({
         startButton: false,
