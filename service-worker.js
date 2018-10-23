@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.2/workbox-sw.js");
 
 importScripts(
-  "/breath-hold-training/precache-manifest.470a8937b10cff5f9cc297f70eac3267.js"
+  "/breath-hold-training/precache-manifest.c6b6e77f5165b5a0c795920533417025.js"
 );
 
 workbox.clientsClaim();
