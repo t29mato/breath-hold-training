@@ -22,7 +22,6 @@ class App extends Component {
           <Route path={this.path + '/breath-hold'} component={BreathHoldTraining} />
           <Route path={this.path + '/tutorial'} component={Tutorial} />
           <Route path={this.path + '/news'} component={News} />
-          <Route path={this.path + '/'} component={Home} />
         </Container>
       </BrowserRouter>
     )
