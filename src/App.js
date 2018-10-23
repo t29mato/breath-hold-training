@@ -15,7 +15,7 @@ class App extends Component {
         <Container>
           <Header/>
           <Route exact path={process.env.PUBLIC_URL + '/'} component={Home} />
-          <Route path={process.env.PUBLIC_URL + '/deep-breath'} component={DeepBreathTraining} />
+          <Route path={`${process.env.PUBLIC_URL}/deep-breath`} component={DeepBreathTraining} />
           <Route path={process.env.PUBLIC_URL + '/breath-hold'} component={BreathHoldTraining} />
           <Route path={process.env.PUBLIC_URL + '/tutorial'} component={Tutorial} />
           <Route path={process.env.PUBLIC_URL + '/news'} component={News} />
