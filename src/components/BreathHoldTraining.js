@@ -45,7 +45,7 @@ export default class BreathHoldTraining extends Component {
         this.stop();
         this.setState({
           startButton: true,
-          message: this.state.interval + '回目の休憩終了です。',
+          message: this.state.interval + '回目の休憩終了です、練習再開できます。',
         });
         this.playSound('FinishRestTime');
       }
