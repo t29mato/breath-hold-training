@@ -5,7 +5,7 @@ export default class Header extends Component {
   render() {
     return (
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand>Breath Hold Training (0.0.3)</Navbar.Brand>
+        <Navbar.Brand>Breath Hold Training (0.0.8)</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
