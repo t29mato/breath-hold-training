@@ -10,11 +10,11 @@ export default class Header extends Component {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Link to='/'>ホーム</Link>
-            <Link to='/deep-breath'>深呼吸トレーニング</Link>
-            <Link to='/breath-hold'>息止めトレーニング</Link>
-            <Link to='/tutorial'>使い方</Link>
-            <Link to='/news'>新着情報</Link>
+          <Nav.Link href="./">ホーム</Nav.Link>
+          <Nav.Link href="./deep-breath">深呼吸トレーニング</Nav.Link>
+          <Nav.Link href="./breath-hold">息止めトレーニング</Nav.Link>
+          <Nav.Link href="./tutorial">使い方</Nav.Link>
+          <Nav.Link href="./news">新着情報</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

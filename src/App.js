@@ -11,7 +11,7 @@ import Header from './components/Header'
 class App extends Component {
   render() {
     return(
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Container>
           <Header/>
           <Route exact path='/' component={Home} />
