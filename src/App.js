@@ -11,14 +11,14 @@ import Header from './components/Header'
 class App extends Component {
   render() {
     return(
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <BrowserRouter>
         <Container>
           <Header/>
-          <Route exact path='/' component={Home} />
-          <Route path='/deep-breath' component={DeepBreathTraining} />
-          <Route path='/breath-hold' component={BreathHoldTraining} />
-          <Route path='/tutorial' component={Tutorial} />
-          <Route path='/news' component={News} />
+          <Route exact path={process.env.PUBLIC_URL + '/'} component={Home} />
+          <Route path={process.env.PUBLIC_URL + '/deep-breath'} component={DeepBreathTraining} />
+          <Route path={process.env.PUBLIC_URL + '/breath-hold'} component={BreathHoldTraining} />
+          <Route path={process.env.PUBLIC_URL + '/tutorial'} component={Tutorial} />
+          <Route path={process.env.PUBLIC_URL + '/news'} component={News} />
         </Container>
       </BrowserRouter>
     )
