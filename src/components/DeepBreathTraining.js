@@ -74,10 +74,9 @@ export default class DeepBreathTraining extends Component {
     this.stop();
     this.setState({
       finishFlag: true,
-      startFlag: false,
       message: '深呼吸トレーニングは終了です。このまま息止めトレーニングに進みましょう。',
     })
-    this.playSound('PressStartButton');
+    this.playSound('FinishDeepBreathTraining');
   }
 
   calculateTotalProgress() {
