@@ -10,15 +10,19 @@ import Header from './components/Header'
 
 class App extends Component {
   render() {
+    this.path = (process.env.NODE_ENV === 'production') ? '/breath-hold-training' : '';
+    console.log(process.env.NODE_ENV);
+    console.log(__dirname);
     return(
       <BrowserRouter>
         <Container>
           <Header/>
-          <Route exact path='/' component={Home} />
-          <Route path='/deep-breath' component={DeepBreathTraining} />
-          <Route path='/breath-hold' component={BreathHoldTraining} />
-          <Route path='/tutorial' component={Tutorial} />
-          <Route path='/news' component={News} />
+          <Route exact path={this.path + '/'} component={Home} />
+          <Route path={this.path + '/deep-breath'} component={DeepBreathTraining} />
+          <Route path={this.path + '/breath-hold'} component={BreathHoldTraining} />
+          <Route path={this.path + '/tutorial'} component={Tutorial} />
+          <Route path={this.path + '/news'} component={News} />
+          <Route path={this.path + '/'} component={Home} />
         </Container>
       </BrowserRouter>
     )
