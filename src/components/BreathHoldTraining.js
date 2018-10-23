@@ -120,7 +120,7 @@ export default class BreathHoldTraining extends Component {
   render() {
     return (
       <div>
-        <h2>息止めトレーニングへようこそ</h2>
+        <h2>息止めトレーニング</h2>
         <Alert variant={'primary'}>
           { this.state.message }
         </Alert>

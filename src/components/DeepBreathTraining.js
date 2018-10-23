@@ -102,7 +102,7 @@ export default class DeepBreathTraining extends Component {
   render() {
     return (
       <div>
-        <h2>深呼吸トレーニングへようこそ</h2>
+        <h2>深呼吸トレーニング</h2>
         <Alert variant={'primary'}>
           { this.state.message }
         </Alert>
