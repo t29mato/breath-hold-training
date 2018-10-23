@@ -10,17 +10,15 @@ import Header from './components/Header'
 
 class App extends Component {
   render() {
-    console.log(process.env.PUBLIC_URL); // debug
     return(
-      // <BrowserRouter basename={'/'}>
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <BrowserRouter>
         <Container>
           <Header/>
-          <Route exact path='/breath-hold-training' component={Home} />
-          <Route path='/breath-hold-training/deep-breath' component={DeepBreathTraining} />
+          <Route exact path='/' component={Home} />
+          <Route path='/deep-breath' component={DeepBreathTraining} />
           <Route path='/breath-hold' component={BreathHoldTraining} />
-          <Route path={process.env.PUBLIC_URL + '/tutorial'} component={Tutorial} />
-          <Route path={process.env.PUBLIC_URL + '/news'} component={News} />
+          <Route path='/tutorial' component={Tutorial} />
+          <Route path='/news' component={News} />
         </Container>
       </BrowserRouter>
     )
