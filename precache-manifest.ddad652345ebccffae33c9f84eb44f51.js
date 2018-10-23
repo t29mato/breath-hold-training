@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/breath-hold-training/static/js/runtime~main.ce263281.js"
   },
   {
-    "revision": "6d667c9e7f35d2303503",
-    "url": "/breath-hold-training/static/js/main.6d667c9e.chunk.js"
+    "revision": "8fa73095f94ba62178ed",
+    "url": "/breath-hold-training/static/js/main.8fa73095.chunk.js"
   },
   {
     "revision": "e4017aa80a1a4fa1dbdd",
     "url": "/breath-hold-training/static/js/1.e4017aa8.chunk.js"
   },
   {
-    "revision": "dcef308c7de8df8a8ea35f642833defe",
+    "revision": "50b02f238c6dd8694327ef488a6720be",
     "url": "/breath-hold-training/index.html"
   }
 ];
