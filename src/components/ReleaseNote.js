@@ -5,7 +5,7 @@ export default class News extends Component {
   render() {
     return (
       <div>
-        <h2>新着情報</h2>
+        <h2>リリースノート</h2>
         <Card>
           <Card.Body>
             ・2018/10/25(木) 08:00 [Ver1.0.2]<br/>
