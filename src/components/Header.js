@@ -6,7 +6,7 @@ export default class Header extends Component {
   render() {
     return (
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand>息止め練習アプリ 1.0.1</Navbar.Brand>
+        <Navbar.Brand>息止め練習アプリ 1.0.2</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
