@@ -29,7 +29,9 @@ export default class DeepBreathTraining extends Component {
     this.breathInInterval = 5; // 5秒
     this.breathOutInterval = 10; // 10秒
     this.breathTimes = 10; // 3回
-    this.audioElem = new Audio();
+    this.audioBreathIn = new Audio('mp3/BreathIn.mp3');
+    this.audioBreathOut = new Audio('mp3/BreathOut.mp3');
+    this.audioFinishDeepBreathTraining = new Audio('mp3/FinishDeepBreathTraining.mp3');
   }
 
   update() {
@@ -41,11 +43,11 @@ export default class DeepBreathTraining extends Component {
     };
     if (time % this.breathInterval === 0) {
       this.setState({ interval: interval + 1, message: '吸って〜', breathInFlag: true })
-      this.playSound('BreathIn');
+      this.audioBreathIn.play();
     }
     if (time % this.breathInterval === 5) {
       this.setState({ message: '吐いて〜', breathInFlag: false })
-      this.playSound('BreathOut');
+      this.audioBreathOut.play();
     }
     this.setState ({ time: this.state.time + 1 })
   }
@@ -76,7 +78,7 @@ export default class DeepBreathTraining extends Component {
       finishFlag: true,
       message: '深呼吸トレーニングは終了です。このまま息止めトレーニングに進みましょう。',
     })
-    this.playSound('FinishDeepBreathTraining');
+    this.audioFinishDeepBreathTraining.play();
   }
 
   calculateTotalProgress() {
@@ -92,11 +94,6 @@ export default class DeepBreathTraining extends Component {
     } else {
       return (this.breathInterval - this.state.time % this.breathInterval) / this.breathOutInterval * 100;
     }
-  }
-
-  playSound(fileName) {
-    this.audioElem.src = 'mp3/' + fileName + '.mp3';
-    this.audioElem.play();
   }
 
   render() {

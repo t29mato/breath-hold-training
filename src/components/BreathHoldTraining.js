@@ -32,7 +32,9 @@ export default class BreathHoldTraining extends Component {
     this.interval = 3; // 3回で終了
     this.minRestTime = 120; // 最低120秒(2分間)は休憩する
     this.score = [];
-    this.audioElem = new Audio();
+    this.audioStartDeepBreathTraining = new Audio('mp3/StartDeepBreathTraining.mp3');
+    this.audioFinishRestTime = new Audio('mp3/FinishRestTime.mp3');
+    this.audioStartCountDown = new Audio('mp3/StartCountDown.mp3');
   }
 
   update() {
@@ -42,17 +44,18 @@ export default class BreathHoldTraining extends Component {
       if (this.state.time > 0) {
         this.setState ({ time: this.state.time - 1 })
       } else { // 休憩終了
+        this.audioFinishRestTime.play();
         this.stop();
         this.setState({
           startButton: true,
           message: this.state.interval + '回目の休憩終了です、練習再開できます。',
         });
-        this.playSound('FinishRestTime');
       }
     }
   }
 
   start() {
+    this.audioStartDeepBreathTraining.play();
     this.intervalTimer = setInterval(() => this.update(), 1000);
     this.setState ({
       startFlag: true,
@@ -97,25 +100,17 @@ export default class BreathHoldTraining extends Component {
         message: 'トレーニングは終了です、お疲れ様でした。',
       })
     } else { // 3回未満
+      this.audioStartCountDown.play();
       this.setState({
         time: this.state.time > this.minRestTime ? this.state.time : this.minRestTime,
         holdFlag: false,
         finishButton: false,
         resetButton: true,
         info: '残り休憩時間',
-      })
-      this.setState({
         message: this.state.interval + '回目の息止め終了。息止め時間か最低2分間の休憩が必要なためカウントダウン開始します。',
       })
-      this.playSound('StartCountDown');
     }
   }
-
-  playSound(fileName) {
-    this.audioElem.src = 'mp3/' + fileName + '.mp3';
-    this.audioElem.play();
-  }
-
 
   render() {
     return (
