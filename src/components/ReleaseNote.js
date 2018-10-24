@@ -17,7 +17,7 @@ export default class News extends Component {
         <br/>
         <Card>
           <Card.Body>
-            ・2018/10/25(木) 22:45 [Ver1.0.1]<br/>
+            ・2018/10/24(水) 22:45 [Ver1.0.1]<br/>
             1. 音声ファイルを毎回読み込む仕様を修正したため、通信量の削減と音声アナウンスが遅れる不具合を修正しました。</Card.Body>
         </Card>
         <br/>
