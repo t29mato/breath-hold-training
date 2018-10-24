@@ -15,6 +15,7 @@ export default class Header extends Component {
             <Link className='nav-link' to='./breath-hold'>息止めトレーニング</Link>
             <Link className='nav-link' to='./tutorial'>使い方</Link>
             <Link className='nav-link' to='./news'>新着情報</Link>
+            <Link className='nav-link' to='./release-note'>リリースノート</Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
