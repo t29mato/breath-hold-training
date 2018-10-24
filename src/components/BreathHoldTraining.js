@@ -90,7 +90,7 @@ export default class BreathHoldTraining extends Component {
   }
 
   finish() {
-    this.score += this.state.time;
+    this.score.push(this.state.time);
     if (this.state.interval === this.interval) { // 3回終了
       this.stop();
       this.setState({
